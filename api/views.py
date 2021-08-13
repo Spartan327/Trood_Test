@@ -7,16 +7,6 @@ from .permisisions import IsOwnerOrReadOnly
 from .serializers import AnswerSerializer, PollSerializer, QuestionSerializer, VoteSerializer
 
 
-class UserList(generics.ListAPIView):
-    queryset = User.objects.all()
-    serializer_class = serializers.UserSerializer
-
-
-class UserDetail(generics.RetrieveAPIView):
-    queryset = User.objects.all()
-    serializer_class = serializers.UserSerializer
-
-
 class PollList(generics.ListCreateAPIView):
     queryset = Poll.objects.all()
     serializer_class = PollSerializer
@@ -34,39 +24,50 @@ class PollDetail(generics.RetrieveUpdateDestroyAPIView):
 
 
 class QuestionList(generics.ListCreateAPIView):
-    queryset = Question.objects.all()
     serializer_class = QuestionSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
-    # def get_queryset(self):
-    #    return Question.objects.filter(poll=self.request.)
-
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
+
+    def get_queryset(self):
+        queryset = Question.objects.filter(poll_id=self.kwargs["pk"])
+        return queryset
 
 
 class QuestionDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Question.objects.all()
     serializer_class = QuestionSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly,
                           IsOwnerOrReadOnly]
+    lookup_field = 'id'
+
+    def get_queryset(self):
+        queryset = Question.objects.all().filter(id=self.kwargs["id"])
+        return queryset
 
 
 class AnswerList(generics.ListCreateAPIView):
-    queryset = Answer.objects.all()
     serializer_class = AnswerSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
 
+    def get_queryset(self):
+        queryset = Answer.objects.all().filter(question=self.kwargs["id"])
+        return queryset
+
 
 class AnswerDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Answer.objects.all()
+
     serializer_class = AnswerSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly,
                           IsOwnerOrReadOnly]
+    lookup_field = 'question_id'
 
+    def get_queryset(self):
+        queryset = Answer.objects.all().filter(id=self.kwargs["question_id"])
+        return queryset
 
 class VoteList(generics.ListCreateAPIView):
     queryset = Vote.objects.all()

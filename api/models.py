@@ -46,7 +46,7 @@ class Question(models.Model):
         ordering = ['poll']
 
     def __str__(self):
-        return f"{self.poll.title[:25]} - {self.question_text[:25]}"
+        return self.question_text
 
 
 class Answer(models.Model):
@@ -73,17 +73,12 @@ class Answer(models.Model):
         ordering = ['question']
 
     def __str__(self):
-        return f"{self.question.question_text[:25]} - {self.answer_text[:25]}"
+        return self.answer_text
 
 
 class Vote(models.Model):
     owner = models.ForeignKey(
         User,
-        on_delete=models.CASCADE,
-        related_name='votes'
-        )
-    poll = models.ForeignKey(
-        Poll,
         on_delete=models.CASCADE,
         related_name='votes'
         )
@@ -99,7 +94,4 @@ class Vote(models.Model):
         )
 
     def __str__(self):
-        return f'{self.poll.title[:15]} -\
-                 {self.question.question_text[:15]} -\
-                 {self.answer.answer_text[:15]} -\
-                 {self.user.username}'
+        return f'{self.question.question_text} - {self.answer.answer_text} - {self.user.username}'
