@@ -48,7 +48,7 @@ class QuestionDetail(generics.RetrieveUpdateDestroyAPIView):
     def get_queryset(self):
         queryset = Question.objects.all().filter(
             question_id=self.kwargs["question_id"]
-            )
+        )
         return queryset
 
 
@@ -76,7 +76,7 @@ class AnswerDetail(generics.RetrieveUpdateDestroyAPIView):
     def get_queryset(self):
         queryset = Answer.objects.all().filter(
             answer_id=self.kwargs["answer_id"]
-            )
+        )
         return queryset
 
 

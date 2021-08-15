@@ -5,7 +5,6 @@ from django.contrib.auth.models import User
 class Poll(models.Model):
     poll_id = models.BigAutoField(primary_key=True)
     title = models.CharField(max_length=400, blank=False, null=False)
-    created = models.DateTimeField(auto_now_add=True)
     owner = models.ForeignKey(
         User,
         related_name='polls',
@@ -23,7 +22,7 @@ class Poll(models.Model):
     class Meta:
         verbose_name_plural = 'Polls'
         verbose_name = 'Poll'
-        ordering = ['created']
+        ordering = ['poll_id']
 
     def __str__(self):
         return self.title
