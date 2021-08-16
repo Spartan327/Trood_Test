@@ -73,7 +73,7 @@ PUT запрос ожидает на вход
 DELETE удаляет опрос
 
 * Доступ к вопросам:
-http://localhost:8000/api/polls/poll_id/questions/
+`http://localhost:8000/api/polls/poll_id/questions/`
 
 GET запрос выводит список вопросов текущего опроса
 POST запрос ожидает на вход 
@@ -83,7 +83,7 @@ POST запрос ожидает на вход
 }
 ```
 
-http://localhost:8000/api/polls/poll_id/questions/question_id
+`http://localhost:8000/api/polls/poll_id/questions/question_id`
 
 GET запрос выводит структуру вопроса
 PUT запрос ожидает на вход 
@@ -98,7 +98,7 @@ PUT запрос ожидает на вход
 DELETE удаляет вопрос
 
 * Доступ к ответам:
-http://localhost:8000/api/polls/poll_id/questions/question_id/answers
+`http://localhost:8000/api/polls/poll_id/questions/question_id/answers`
 
 GET запрос выводит список ответов текущего вопроса
 POST запрос ожидает на вход 
@@ -108,7 +108,7 @@ POST запрос ожидает на вход
 }
 ```
 
-http://localhost:8000/api/polls/poll_id/questions/question_id/answers/answer_id
+`http://localhost:8000/api/polls/poll_id/questions/question_id/answers/answer_id`
 
 GET запрос выводит структуру ответа
 PUT запрос ожидает на вход 
@@ -122,7 +122,7 @@ PUT запрос ожидает на вход
 DELETE удаляет вопрос
 
 * Доступ к прохождению опроса:
-http://localhost:8000/api/votes/
+`http://localhost:8000/api/votes/`
 
 GET запрос выводит список всех ответивших
 POST запрос ожидает на вход 
