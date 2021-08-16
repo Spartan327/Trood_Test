@@ -20,7 +20,9 @@
 ### Запуск тестов
 
 - установите `TESTING=1` в файле `.env`
-- запустить проект:`docker-compose down -v && docker-compose up --build`
+- остановить проект и запустить проверку тестов с выводом в консоли:  
+`docker-compose down -v`  
+`docker-compose up --build`  
 
 
 ### Технические требования к заданию
