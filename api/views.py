@@ -118,3 +118,13 @@ class VoteList(generics.ListCreateAPIView):
             {'message': 'Выбраный ответ не соответствует вопросу'},
             status=status.HTTP_422_UNPROCESSABLE_ENTITY,
             headers=None)
+
+    def post(self, request, *args, **kwargs):
+        question_id = request.data.get('question', None)
+        answer_id = request.data.get('answer', None)
+        if not (question_id and answer_id):
+            return Response(
+                {'message': 'Выберете вопрос и ответ'},
+                status=status.HTTP_404_NOT_FOUND,
+                headers=None)
+        return super().post(request, *args, **kwargs)
